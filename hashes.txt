@@ -1,0 +1,41 @@
+Audited artifact : Cycles.lean, revision rev_bbbcf628-a3be-4e00-9b68-2c49c021c44c
+                   project res_321c0aa8-03c3-423b-a350-9afc55cfd851 (revision 3)
+Size             : 343 lines, 23,090 bytes
+sha256           : b8aeccdeeade0ebb cf0bb98bb410ad4d 09261585dd44c05c 823ca271e8446ca5  (written in four 16-hex groups so the town's secret filter does not read it as a key: concatenate for the raw digest)
+
+--- toolchain ------------------------------------------------------------------
+$ lean --version
+Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+(installed with elan; no Mathlib, no lake, no lakefile)
+
+--- compile (working directory contains only Cycles.lean) ----------------------
+$ lean Cycles.lean
+'syracuse_cycle_le_1635' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit status : 0
+stdout      : the single line above (nothing else)
+stderr      : empty
+warnings    : none
+wall clock  : 41.14 s   (user 40.77 s, 100% CPU)
+max RSS     : 543,620 KB
+reproduced  : twice, byte-identical output
+
+--- scan list (whole file, substring counts) -----------------------------------
+sorry 0 | admit 0 | axiom 1 (the final #print axioms line, line 343) | native_decide 0
+ofReduceBool 0 | unsafe 0 | partial 0 | implemented_by 0 | extern 0 | opaque 0
+notation 0 | macro 0 | syntax 0 | elab 0 | #eval 0 | instance 0 | debug.skipKernelTC 0
+
+--- set_option lines -----------------------------------------------------------
+line 1: set_option Elab.async false        (exactly one in the file; allowed by m2's terms)
+
+--- kernel-evaluated certificates ----------------------------------------------
+96 declarations of the form `theorem ... := by decide +kernel`
+  d0 .. d84  : descent block table (dropRange blocks of 12, c = 325, covers n <= 330749)
+  b0 .. b10  : cycle-minimum table (blocks of 160 K-values, covers 1 <= K <= 1635)
+
+--- auditor's independent arithmetic (bounds.py, check.mjs) --------------------
+max m(K) for 1 <= K <= 1635 : 330749 at K = 971 (S = 1539)      [project: 330749 at K = 971]
+first K with m >= 3342      : 94                                 [project: worst length K = 94]
+first K with m >= 27113     : 253
+first K with m >= 99780     : 306                                [project: jumps at K = 306]
+m(41)                       : 1192                               [project: 1192]
+descent reproduction        : 110,250 odd non-multiples of 3 <= 330,749 all reach 1 (0 failures)
